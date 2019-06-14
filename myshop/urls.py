@@ -24,7 +24,8 @@ urlpatterns = [
 	url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('shop.urls'))
+    path('', include('shop.urls')),
+    path('present', include("Present.urls"))
 
 ]
 
