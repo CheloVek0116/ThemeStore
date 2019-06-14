@@ -12,15 +12,13 @@
         <h1>Создание поста</h1>
     </div>
     <div class="row">
-        <form method="post" action="{% url 'shop:ProductCreate' username=user.username %}">
+        <form method="post" action="{% url 'shop:ProductAdd' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.name }}
             {{ form.slug }}
             {{ form.description }}
-            {{ form.categories }}
             {{ form.price }}
-            {{ form_image.preview }}
-            {{ form_image.image }}
+            {{ form.images }}
             <div>
                 <input type="submit" value="Добавить пост"/>
             </div>

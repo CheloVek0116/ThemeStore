@@ -1,14 +1,11 @@
 from django import forms
+from django.db import models
 from .models import *
 
 
-class ProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ('name', 'slug', 'description', 'categories', 'price',)
-
-
-class ProductImageForm(forms.ModelForm):
-    class Meta:
-        model = ProductImage
-        fields = ('product', 'preview', 'image',)
+class ProductForm(forms.Form):
+	name        = forms.CharField(label="Название")
+	slug        = forms.SlugField()
+	description = forms.CharField(label="Описание")
+	price       = forms.DecimalField(max_digits=10, decimal_places=2, label="Цена")
+	images      = forms.ImageField(label='Фотографии', widget=forms.FileInput(attrs={'multiple': 'multiple'}))

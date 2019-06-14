@@ -1,194 +1,121 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<title>Титле</title>
-	
+{% block style_rating %}
+{% endblock style_rating %}
 
-	<link rel="stylesheet" href="{% static 'css/reset.css' %}" type="text/css">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
-	<link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
-</head>
-<body>
-	
-	<header>
-		<div class="container">
-			<div class="heading clearfix">
-				
-				<h1 class="logo">
-					ThemeStore
-					</h1>
-
-		
-
-				<nav>
-			        <ul class ="menu nav navbar-nav">
-			          <li class="active">
-			            <a href="#">Главная</a>
-			            
-			          </li>
+{% block title %}Титле{% endblock title %}
 
 
-			          <li class="dropdown">
-						 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLink">
-						  Каталог 
-						  <span class="caret"></span>
-						 </a>
-
-						 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 20px, 0px);">
-							  <a href="#" class="dropdown-item">Wordpress</a>
-							  <a href="#" class="dropdown-item">Html</a>
-							  <a href="#" class="dropdown-item">CMS</a>
-							  <a href="#" class="dropdown-item">UI Дизайн</a>
-							  <a href="#" class="dropdown-item">Скрипты</a>
-							  <a href="#" class="dropdown-item">Другое</a>
-						 </div>
-
-					</li>
-
-
-			          <li>
-			            <a href=""#>Блог</a>
-			          </li>
-
-
-			          <li>
-			            <a href="#">
-							Войти
-						</a>
-			          </li>
-
-			        </ul>
-      </nav>
-      
-			</div>
-
-			<div class="titles">
-				<div class="first_title">
-					Добро пожаловать на ThemeStore
-				</div>
-
-				<h1>
-					Начни уже сейчас!
-				</h1>
-			</div>
-
-			<a href="#" class="button">
-				Начать
-			</a>
-			
+{% block titles %}
+	<div class="titles">
+		<div class="first_title">
+			Добро пожаловать на ThemeStore
 		</div>
-	</header>
+
+		<h1>
+			Начни уже сейчас!
+		</h1>
+	</div>
+
+	<a href="#" class="button">
+		Начать
+	</a>
+{% endblock titles %}
 
 
-	<section id="services">
+{% block content %}
+    <section id="services">
 
 
-		<div class="container">
-			<div class="title">
-				<h2>
-					Мы лучшая площадка в рунете.
-				</h2>
+	<div class="container">
+		<div class="title">
+			<h2>
+				Мы лучшая площадка в рунете.
+			</h2>
 
-				<p>
-					Тут вы можете найти множество разных html/wordpress шаблонов, различных скриптов и других интересных продуктов. Мы гарантируем :
-				</p>
+			<p>
+				Тут вы можете найти множество разных html/wordpress шаблонов, различных скриптов и других интересных продуктов. Мы гарантируем :
+			</p>
+		</div>
+
+		<div class="services clearfix">
+
+			<div class="services_item">
+
+				<img src="{% static 'img/item_first.png' %}" alt="Услуга">
+
+				<h3>Безопасность</h3>
+
+				<p>Все сделки проходят через наш сайт, все продукты соответствоют описанию</p>
+
 			</div>
-			
-			<div class="services clearfix">
-
-				<div class="services_item">
-
-					<img src="{% static 'img/item_first.png' %}" alt="Услуга">
-
-					<h3>Безопасность</h3>
-
-					<p>Все сделки проходят через наш сайт, все продукты соответствоют описанию</p>
-
-				</div>
 
 
-				<div class="services_item">
-					
-					<img src="{% static 'img/item_quality.png' %}" alt="Услуга">
+			<div class="services_item">
 
-					<h3>Качество</h3>
+				<img src="{% static 'img/item_quality.png' %}" alt="Услуга">
 
-					<p>Каждый продукт проходит модерацию, и мы выбераем только качественные и адаптивные товары.</p>
-				</div>
-	
-				<div class="services_item">
-					
-					<img src="{% static 'img/item_fast.png' %}" alt="Услуга">
+				<h3>Качество</h3>
 
-					<h3>Скорость</h3>
+				<p>Каждый продукт проходит модерацию, и мы выбераем только качественные и адаптивные товары.</p>
+			</div>
 
-					<p>Покупка совершается быстро, нужно всеволишь загегестрироваться</p>
-				</div>
+			<div class="services_item">
 
+				<img src="{% static 'img/item_fast.png' %}" alt="Услуга">
+
+				<h3>Скорость</h3>
+
+				<p>Покупка совершается быстро, нужно всеволишь загегестрироваться</p>
 			</div>
 
 		</div>
 
-
-	</section>
-
-	<section id="besttemplates">
-		<div class="container">
-			
-			<div class="title">
-				<h2>
-					Откройте для себя лучшие темы недели.
-				</h2>
-
-				<p>
-					Каждую неделю наша система отбирает лучшие шаблоны по их рейтингу. <br>
-					Также на нашем сайте доступно - 0 WordPress тем, и -  0 html-шаблонов.
-
-				</p>
-			</div>
-			
-			
-			<div class="input-group">
-			    <input type="text" class="form-control" placeholder="Найти WordPress шаблон">
-			    <div class="input-group-append">
-			      <button class="btn btn-secondary" type="button" style="border-radius: 0px 7px 7px 0px;">
-			        <i class="fa fa-search"></i>
-			      </button>
-			    </div>
-  			</div>
+	</div>
 
 
+</section>
 
 
-			<div class="works clearfix">
-				
-				<p>Hi guys</p>
+<section id="besttemplates">
+	<div class="container">
+
+		<div class="title">
+			<h2>
+				Откройте для себя лучшие темы недели.
+			</h2>
+
+			<p>
+				Каждую неделю наша система отбирает лучшие шаблоны по их рейтингу. <br>
+				Также на нашем сайте доступно - 0 WordPress тем, и -  0 html-шаблонов.
+
+			</p>
+		</div>
 
 
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Найти WordPress шаблон">
+			<div class="input-group-append">
+				<button class="btn btn-secondary" type="button" style="border-radius: 0px 7px 7px 0px;">
+					<i class="fa fa-search"></i>
+				</button>
 			</div>
 		</div>
-	</section>
 
-	<section>
-		<div class="container"></div>
-	</section>
 
-	<footer>
-		<div class="container">
-			<h1 id="f">Это футер</h1>
+
+
+		<div class="works clearfix">
+
+			<p>Hi guys</p>
+
+
 		</div>
-	</footer>
-		
-	
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+	</div>
+</section>
+
+<section>
+	<div class="container"></div>
+</section>
+{% endblock content %}

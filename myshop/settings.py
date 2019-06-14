@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 
     # local apps
     'shop',
-    "Present"
 ]
 
 MIDDLEWARE = [

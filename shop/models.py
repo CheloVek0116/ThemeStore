@@ -40,7 +40,7 @@ class Product(models.Model):
 	name        = models.CharField(max_length=200, db_index=True, verbose_name="Название")
 	slug        = models.SlugField(max_length=200, db_index=True)
 	description = models.TextField(blank=True, verbose_name="Описание")
-	categories  = models.ManyToManyField('Category', blank=True, verbose_name='Категория',related_name='products')
+	categories  = models.ManyToManyField('Category', blank=True, verbose_name='Категория', related_name='products')
 	price       = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
 	ratings     = GenericRelation(Rating, related_query_name='products')
 	created     = models.DateTimeField(auto_now_add=True)
