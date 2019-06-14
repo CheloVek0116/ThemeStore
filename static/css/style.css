@@ -1,0 +1,108 @@
+header {
+	background: url(../img/head_photo.png) no-repeat center top/cover;
+	padding-bottom: 160px;
+}
+
+body {
+	color: #222;
+}
+
+div {
+	box-sizing: border-box;
+}
+
+
+nav {
+	float: right;
+	margin-top: 50px;
+}
+
+h1 {
+	font-size: 	75px;
+	color: #fff;
+	text-transform: uppercase;
+	text-align:center;
+	margin: 15px;
+}
+
+
+
+
+
+.container {
+	width:930px;
+	margin :0 auto;
+}
+
+
+.logo {
+	float: left;
+	margin-top: 45px;
+	font-size: 19px;
+	text-transform: none;
+}
+
+.menu {
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+
+.menu li {
+	float: left;
+	display: block;
+	margin-right: 41px;
+}
+
+.menu li a {
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+
+}
+
+.menu li a:hover{
+	color: #777;
+	transition: 0.5s all;
+}
+
+.dropdown-menu.show {
+	background: rgba(67, 68, 68, 40%);
+}
+
+.avatar {
+	margin-right: 10px;
+	width: 38px;
+	height: 38px;
+	border: 2px solid black;
+	border-radius: 50%;
+	text-align: center;
+	background: #e17076;
+	display: block;
+}
+
+.author {
+	display: flex;
+}
+
+.card_btns {
+	width: 100%;
+	display: flex;
+}
+
+.card_btns > .btn_author {
+	position: absolute;
+	right: 10px;
+}
+
+main {
+	background: #13284a;
+}
+
+footer {
+	height: 250px;
+	font-size: 84px;
+	background: #10203a;
+	padding-top: 10%;
+}
