@@ -25,7 +25,11 @@
                 <nav>
                     <ul class ="menu">
                         <li>
-                            <a href="{% url 'shop:ProductList' %}">Главная</a>
+                            <a href="{% if user.is_authenticated %}
+                                        {% url 'shop:ProductList' %}
+                                     {% else %}
+                                        {% url 'present_page' %}      
+                                     {% endif %}">Главная</a>
                         </li>
 
 
