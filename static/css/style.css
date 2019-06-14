@@ -69,9 +69,7 @@ h1 {
 }
 
 .dropdown-menu {
-	background: rgba(67, 68, 68, 40%);
-	transition: 0.5s all;	
-
+	background-color: rgba(67, 68, 68, 40%) !important;
 }
 
 
