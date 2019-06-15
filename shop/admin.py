@@ -4,8 +4,8 @@ from .models import *
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price',  'created', 'updated',]
-    list_filter = ['created', 'updated',]
+    list_display = ['name', 'slug', 'price',  'created',]
+    list_filter = ['created']
     list_editable = ['price',]
     prepopulated_fields = {'slug': ('name', )}
 

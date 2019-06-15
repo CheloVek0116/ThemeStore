@@ -233,7 +233,7 @@ footer {
 
 
 
-/*.avatar {
+.avatar {
 	margin-right: 10px;
 	width: 38px;
 	height: 38px;
@@ -258,6 +258,6 @@ footer {
 	right: 10px;
 }
 
-main {
+/*main {
 	background: #13284a;
 }*/
