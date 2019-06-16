@@ -1,28 +1,56 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Авторизация{% endblock title %}</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<body>
 
-{% block content %}
 
-{% if form.errors %}
-<div class="alert alert-danger" role="alert">
-    Your username and password didn't match. Please try again.
-</div>
-{% endif %}
 
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
+<body class="login-page" style="background: url(frost.jpg);">
+<main>
+    <div class="login-block">
+        <form method="post" action="{% url 'login' %}">
+        <img src="new21.png" alt="Scanfcode" class="img-responsive center-block" style="width: 100%;">
+        <h1>Введите свои данные</h1>
+        <div class="form-group">
+            <div class="input-group">
+                <label>{{ form.username.label_tag }}<span img src="user.png" alt=""><img src="user.png" height="20px" width="20px"></span></label>
+                          <input type="text" class="form-control" placeholder="ФИО" id="name">
+                {{ form.username }}
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="exampleInputEmail1">{{ form.username.label_tag }}</label>
-        {{ form.username }}
+        <hr class="hr-xs">
+
+        <div class="form-group">
+            <div class="input-group">
+                <span img src="password.png" alt=""><img src="password.png" height="20px" width="20px"></i></span>
+               <!-- <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>-->
+                <input id="password" type="password" class="form-control" placeholder="Номер зачетной книжки">
+            </div>
+        </div>
+
+        <button type="buttom" class="btn btn-primary btn-lg" onclick="onClick();">Подключиться</button>
+
+        <div class="login-footer">
+
+        </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">{{ form.password.label_tag }}</label>
-        {{ form.password}}
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-{% endblock content %}
+</main>
+</body>
 
 
 
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock js %}
+</body>
+</html>
