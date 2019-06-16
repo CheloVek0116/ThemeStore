@@ -70,6 +70,18 @@ class ProductAdd(LoginRequiredMixin, FormView):
                             photo.image.save(f['images'].name, ContentFile(data))
                             photo.preview = f['preview']
                             photo.save()
+                            
+                            try:
+                                os.makedirs('%suser_products/%s/%s/' % (settings.MEDIA_ROOT, photo.product.author.username, photo.product.name))
+                            except:
+                                pass
+                            new_path = '%suser_products/%s/%s/%s' % (settings.MEDIA_ROOT, photo.product.author.username, photo.product.name, photo.image.name)
+                            print(photo.image.path, new_path)
+                            os.rename(photo.image.path, new_path)
+                            new_path = '/user_products/%s/%s/%s' % (photo.product.author.username, photo.product.name, photo.image.name)
+                            photo.image.name = new_path
+                            photo.save()
+
                     return redirect(product)
                 else:
                     error = 'Выберите титульное фото'

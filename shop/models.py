@@ -3,6 +3,7 @@ from django.shortcuts import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from star_ratings.models import Rating
 from django.utils.text import slugify
+import os
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -13,7 +14,6 @@ class User(AbstractUser):
 	avatar      = models.ImageField(blank=True, null=True)
 	first_name  = models.CharField(max_length=50, verbose_name='Имя')
 	last_name   = models.CharField(max_length=50, verbose_name='Фамилия')
-	subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, verbose_name='Подписчики', related_name='sub')
 
 	def __str__(self):
 		return self.username
@@ -36,6 +36,7 @@ class Category(models.Model):
 		return self.name
 
 
+
 class Product(models.Model):
 	author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
 	name        = models.CharField(max_length=200, verbose_name="Название")
@@ -49,7 +50,7 @@ class Product(models.Model):
 	def get_absolute_url(self):
 		  return reverse('shop:ProductDetail', kwargs={'username': self.author.username, 'slug': self.slug})
 
-	def save(self,*args, **kwargs):
+	def save(self, *args, **kwargs):
 		self.slug = self.gen_slug(self.name)
 		super().save(*args, **kwargs)
 
@@ -63,8 +64,7 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name + ' by ' + self.author.username
 
-
 class ProductImage(models.Model):
-	product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='images')
+	product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
 	preview = models.BooleanField(default=False)
-	image = models.ImageField()
+	image   = models.ImageField()
