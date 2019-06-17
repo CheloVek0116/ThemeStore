@@ -19,7 +19,7 @@ class User(AbstractUser):
 		return self.username
 
 	def get_absolute_url(self):
-		return reverse('user_page_url', kwargs={'username': self.username})
+		return reverse('profileUser:ProfileDetail', kwargs={'username': self.username})
 
 	class Meta:
 		verbose_name = 'Прифиль'
