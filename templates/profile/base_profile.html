@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load ratings %}
+{% load static %}
+
+
+{% block title %}
+Страница товаров
+{% endblock %}
+
+
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs justify-content-end">
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Active</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Link</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+						</li>
+					</ul>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-3">
+							<img src="{{ profile.avatar.url }}" alt="" width="200px" height="200px" class="rounded-circle">
+						</div>
+						<div class="col-9">
+							<h4>{{ profile.first_name }} {{profile.last_name }}</h4>
+							<p class="description">
+								аписание
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+	</div>
+{% endblock content %}

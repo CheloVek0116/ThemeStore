@@ -7,6 +7,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome/css/all.css' %}" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% block style_rating %}
         <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
@@ -16,47 +17,48 @@
 <body>
     <header>
         <div class="container">
-            <div class="heading clearfix">
-
-                <h1 class="navbar-brand logo">
-                    ThemeStore
-                </h1>
-
-                <nav>
-                    <ul class ="menu">
-                        <li>
-                            <a href="{% if user.is_authenticated %}
-                                        {% url 'shop:ProductList' %}
-                                     {% else %}
-                                        {% url 'present_page' %}      
-                                     {% endif %}">Главная</a>
-                        </li>
-
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLink">
-                                Каталог 
-                                <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start">
-                                <a href="{% url 'shop:ProductList' category='wordpress' %}" class="dropdown-item">Wordpress</a>
-                                <a href="{% url 'shop:ProductList' category='html' %}" class="dropdown-item">Html</a>
-                                <a href="{% url 'shop:ProductList' category='cms' %}" class="dropdown-item">CMS</a>
-                                <a href="{% url 'shop:ProductList' category='ui' %}" class="dropdown-item">UI Дизайн</a>
-                                <a href="{% url 'shop:ProductList' category='scripts' %}" class="dropdown-item">Скрипты</a>
-                            </div>
-
-                        </li>
-
-
-                        <li>
-                            <a href="#">Связь</a>
-                        </li>
-
-                        {% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-2">
+                    <a href="{% if user.is_authenticated %}
+                                {% url 'shop:ProductList' %}
+                            {% else %}
+                                {% url 'present_page' %}      
+                            {% endif %}">
+                        <img src="{% static 'img/logo.png' %}" alt="Scanfcode" width="100%">
+                    </a>
+                </div>
+                <div class="col-6 ml-auto">
+                    <nav>
+                        <ul class ="menu">
                             <li>
-                                <a href="#">Профиль</a>
+                                <a href="{% if user.is_authenticated %}{% url 'shop:ProductList' %}{% else %}{% url 'present_page' %}{% endif %}">Главная</a>
+                            </li>
+
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLink">
+                                    Каталог 
+                                    <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start">
+                                    <a href="{% url 'shop:ProductList' category='wordpress' %}" class="dropdown-item">Wordpress</a>
+                                    <a href="{% url 'shop:ProductList' category='html' %}" class="dropdown-item">Html</a>
+                                    <a href="{% url 'shop:ProductList' category='cms' %}" class="dropdown-item">CMS</a>
+                                    <a href="{% url 'shop:ProductList' category='ui' %}" class="dropdown-item">UI Дизайн</a>
+                                    <a href="{% url 'shop:ProductList' category='scripts' %}" class="dropdown-item">Скрипты</a>
+                                </div>
+
+                            </li>
+
+
+                            <li>
+                                <a href="{% url 'cart:CartDetail' %}"><i class="fas fa-shopping-cart"></i> Корзина</a>
+                            </li>
+
+                            {% if user.is_authenticated %}
+                            <li>
+                                <a href="{{ user.get_absolute_url }}">Профиль</a>
                             </li>
                             <li>
                                 <a href="{% url 'shop:ProductAdd' %}">+</a>
@@ -64,15 +66,14 @@
                             <li>
                                 <a href="{% url 'logout' %}">Выйти</a>
                             </li>
-                        {% else %}
+                            {% else %}
                             <li>
                                 <a href="{% url 'login' %}">Войти</a>
                             </li>
-                        {% endif %}
-                        
-
-                    </ul>
-                </nav>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
             </div> 
             {% block titles %}
             {% endblock titles %}           

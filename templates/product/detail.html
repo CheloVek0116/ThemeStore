@@ -69,6 +69,18 @@
 								<div>
 									<a href="#" class="btn btn-outline-success btn-sm"><span>{{ product.price }} руб.</span> | Приобрести</a> 
 								</div>
+								{% if user.username != product.author.username %}
+								    <form action="{% url 'cart:CartAdd' product.id %}" method="post">
+										{% if error %}
+											<button disabled><i class="fas fa-shopping-cart"></i></button>
+										   	<p>{{ error }}</p>
+										{% else %}
+											{% csrf_token %}
+											<button type="submit"><i class="fas fa-shopping-cart"></i></button>
+										{% endif %}
+									    
+									</form>
+								{% endif %}
 								<div class="btn_author">
 									<a href="#" class="btn btn-outline-light btn-sm">{{ product.author.first_name }} {{ product.author.last_name }} | {{ product.created|date:"d.m.y" }}</a>
 
