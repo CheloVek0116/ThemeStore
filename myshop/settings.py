@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
 
     # local apps
+    'profileUser',
+    'cart',
     'shop',
 ]
 
@@ -140,4 +142,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
 
 
-AUTH_USER_MODEL = 'shop.User'
+AUTH_USER_MODEL = 'profileUser.User'
+
+CART_SESSION_ID = 'cart'

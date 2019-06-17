@@ -12,53 +12,53 @@
 		<h1>Создание поста</h1>
 	</div>
 	<div class="row">
-		<form method="post" action="{% url 'shop:ProductAdd' %}" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ error }}
-			<div class="set-text form-row">
-				<div class="col-3">
-					<h3>Название</h3>
-					{{ form.name }}
+		<div class="col-12">
+			<form method="post" action="{% url 'shop:ProductAdd' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ error }}
+				<div class="set-text form-row">
+					<div class="col-3">
+						<h3>Название</h3>
+						{{ form.name }}
+					</div>
+					<div class="col-3">
+						<h3>Описание</h3>
+						{{ form.description }}
+					</div>
+					<div class="col-3">
+						<h3>Цена</h3>
+						{{ form.price }}
+					</div>
+					<div class="col-3 d-flex flex-column">
+						<h3>Категория</h3>
+						{% for cat in form.categories %}
+							{{ cat }}
+						{% endfor %}
+					</div>
 				</div>
-				<div class="col-3">
-					<h3>Описание</h3>
-					{{ form.description }}
-				</div>
-				<div class="col-3">
-					<h3>Цена</h3>
-					{{ form.price }}
-				</div>
-				<div class="col-3 d-flex flex-column">
-					<h3>Категория</h3>
-					{% for cat in form.categories %}
-						{{ cat }}
+
+				
+				<div class="set-image row mt-3 justify-content-center">
+					{{ form_images.management_form }}
+					{% for form_img in form_images %}
+						<div class="col-2" id="card-image-{{ forloop.counter|add:'-1' }}" style="visibility: hidden;">
+							<label for="id_form-{{ forloop.counter|add:'-1' }}-images" style="cursor: pointer;">
+								<img id="form-{{ forloop.counter|add:'-1' }}-images" height="150px" src="{% static 'img/no_image.png' %}" alt="your image" />
+							</label>
+							{{ form_img.images }}
+							{{ form_img.preview }}
+							{% if  forloop.counter != 1%}
+							    <input id="form-{{ forloop.counter|add:'-1' }}-btn" class="btn btn-outline-danger btn-sm" disabled value="удалить" type="button" onclick="removeIMG(this.id);"/>
+							{% endif %}
+							
+						</div>
 					{% endfor %}
 				</div>
-			</div>
-
-			
-			<div class="set-image row mt-3 justify-content-center">
-				{{ form_images.management_form }}
-				{% for form_img in form_images %}
-					<div class="col-2" id="card-image-{{ forloop.counter|add:'-1' }}" style="visibility: hidden;">
-						<label for="id_form-{{ forloop.counter|add:'-1' }}-images" style="cursor: pointer;">
-							<img id="form-{{ forloop.counter|add:'-1' }}-images" height="150px" src="{% static 'img/no_image.png' %}" alt="your image" />
-						</label>
-						{{ form_img.images }}
-						{{ form_img.preview }}
-						{% if  forloop.counter != 1%}
-						    <input id="form-{{ forloop.counter|add:'-1' }}-btn" class="btn btn-outline-danger btn-sm" disabled value="удалить" type="button" onclick="removeIMG(this.id);"/>
-						{% endif %}
-						
-					</div>
-				{% endfor %}
-			</div>
-			<div class="row mt-3">
-				<div class="col-4"></div>
-				<div class="col-4"><input type="submit" class="btn btn-success" value="Добавить пост"/></div>
-				<div class="col-4"></div>
-			</div>
-		</form>
+				<div class="row mt-3">
+					<div class="col-12"><input type="submit" class="btn btn-success" value="Добавить пост"/></div>
+				</div>
+			</form>
+		</div>
 	</div>
 	
 {% endblock %}
