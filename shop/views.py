@@ -3,6 +3,7 @@ from django.views.generic import View, ListView, DetailView, FormView, CreateVie
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.base import ContentFile
 
+from cart.models import CartUser
 from cart.cart import Cart
 from .models import *
 from .forms import *
@@ -30,12 +31,18 @@ class ProductList(ListView):
 class ProductDetail(DetailView):
 
     def get(self, request, username, slug):
-        cart = Cart(request)
         product = get_object_or_404(Product, author__username=username, slug=slug)
         images = ProductImage.objects.filter(product=product)
         error = None
-        if str(product.id) in cart.all():
-            error = 'Товар уже в корзине'
+        if request.user.is_authenticated:
+            cart = CartUser.objects.get(user=request.user).products.values_list('id', flat=True)
+            if product.id in cart:
+                error = 'Товар уже в корзине'
+        else:
+            cart = Cart(request)
+            if str(product.id) in cart.all():
+                error = 'Товар уже в корзине'
+
         context = {
                 'product': product,
                 'images' : images,

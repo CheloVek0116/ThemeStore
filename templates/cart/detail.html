@@ -16,25 +16,46 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for item in cart %}
-			{% with product=item.product %}
-			<tr>
-				<td>
-					<a href="{{ product.get_absolute_url }}">
-						{% for img in product.images.all %}
-							{% if img.preview %}
-							    <img src="{{ img.image.url }}" height="150px" alt="" />
-							{% endif %}
-						{% endfor %}
-						
-					</a>
-				</td>
-				<td>{{ product.name }}</td>
-				<td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
-				<td class="num">{{ item.price }} руб.</td>
-			</tr>
-			{% endwith %}
-			{% endfor %}
+			{% if user.is_authenticated %}
+			    {% for product in cart.products.all %}
+				<tr>
+					<td>
+						<a href="{{ product.get_absolute_url }}">
+							{% for img in product.images.all %}
+								{% if img.preview %}
+								    <img src="{{ img.image.url }}" height="150px" alt="" />
+								{% endif %}
+							{% endfor %}
+							
+						</a>
+					</td>
+					<td>{{ product.name }}</td>
+					<td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
+					<td class="num">{{ product.price }} руб.</td>
+				</tr>
+				{% endfor %}
+			{% else %}
+			    {% for item in cart %}
+				{% with product=item.product %}
+				<tr>
+					<td>
+						<a href="{{ product.get_absolute_url }}">
+							{% for img in product.images.all %}
+								{% if img.preview %}
+								    <img src="{{ img.image.url }}" height="150px" alt="" />
+								{% endif %}
+							{% endfor %}
+							
+						</a>
+					</td>
+					<td>{{ product.name }}</td>
+					<td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
+					<td class="num">{{ item.price }} руб.</td>
+				</tr>
+				{% endwith %}
+				{% endfor %}
+			{% endif %}
+			
 			<tr class="total">
 				<td>Total</td>
 				<td colspan="2"></td>

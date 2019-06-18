@@ -3,7 +3,6 @@ from django.shortcuts import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from star_ratings.models import Rating
 from django.utils.text import slugify
-import os
 
 from django.conf import settings
 
