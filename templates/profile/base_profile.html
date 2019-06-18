@@ -15,29 +15,30 @@
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs justify-content-end">
 						<li class="nav-item">
-							<a class="nav-link active" href="#">Active</a>
+							<a class="nav-link {% block profile %}{% endblock profile %}" href="{{ profile.get_absolute_url }}">Профиль</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
+							<a class="nav-link {% block cards %}{% endblock cards %}" href="{% url 'profileUser:ProfileCards' username=profile.username %}">Работы</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-						</li>
+						{% if user.username == profile.username %}
+						    <li class="nav-item">
+								<a class="nav-link {% block other %}{% endblock other %}" href="#">Настройки</a>
+							</li>
+						{% endif %}
 					</ul>
 				</div>
 				<div class="card-body">
-					<div class="row">
-						<div class="col-3">
-							<img src="{{ profile.avatar.url }}" alt="" width="200px" height="200px" class="rounded-circle">
-						</div>
-						<div class="col-9">
-							<h4>{{ profile.first_name }} {{profile.last_name }}</h4>
-							<p class="description">
-								аписание
-							</p>
-						</div>
+					    <div class="row">
+							<div class="col-3">
+								<img src="{{ profile.avatar.url }}" alt="" width="200px" height="200px" class="border border-primary rounded-circle">
+								<h4>{{ profile.username }}</h4>
+							</div>
+							<div class="col-9">
+								<h4>{{ profile.first_name }} {{profile.last_name }}</h4>
+								{% block profile_body %}
+								{% endblock profile_body %}
+							</div>
 					</div>
-
 				</div>
 			</div>
 		</div>

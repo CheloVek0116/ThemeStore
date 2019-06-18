@@ -4,9 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from cart.cart import Cart
 from .models import *
+from shop.models import *
 
 
-class ProfileDetail(LoginRequiredMixin, ListView):
+class ProfileDetail(ListView):
 	
 	def get(self, request, **kwargs):
 		username = kwargs.get('username')
@@ -14,4 +15,16 @@ class ProfileDetail(LoginRequiredMixin, ListView):
 		context = {
 				'profile': profile
 		}
-		return render(request, 'profile/base_profile.html', context=context)
+		return render(request, 'profile/profile.html', context=context)
+
+class ProfileCards(ListView):
+	
+	def get(self, request, **kwargs):
+		username = kwargs.get('username')
+		profile = get_object_or_404(User, username=username)
+		products = Product.objects.filter(author=profile)
+		context = {
+				'products': products,
+				'profile' : profile
+		}
+		return render(request, 'profile/profile_cards.html', context=context)

@@ -24,7 +24,7 @@
                             {% else %}
                                 {% url 'present_page' %}      
                             {% endif %}">
-                        <img src="{% static 'img/logo.png' %}" alt="Scanfcode" width="100%">
+                        <img src="{% static 'img/logo.png' %}" alt="Scanfcode" width="80%">
                     </a>
                 </div>
                 <div class="col-6 ml-auto">
@@ -80,7 +80,7 @@
         </div>
     </header>
     <main>
-        <div class="container">
+        <div class="container mt-4">
             {% block content %}{% endblock content %}
         </div>
     </main> 

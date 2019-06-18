@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% load ratings %}
-{% load static %}
 
 
 {% block title %}
@@ -11,29 +9,6 @@
 {% block content %}
     <h1>Товары</h1>
     <div class="row">
-        {% for product in products %}
-        <div class="col-sm-4 mb-3">
-            <div class="card text-white bg-dark">
-                <a href="{{ product.get_absolute_url }}">
-                    {% for prev_image in product.images.all %}
-                        {% if prev_image.preview %}
-                            <img src="{{ prev_image.image.url }}" class="card-img-top">
-                        {% endif %}
-                    {% endfor %}
-                </a>
-                <div class="card-body">
-                    <div class="author">
-                        <a class="avatar">qqq</a>
-                        {{ product.author.first_name }}
-                        {{ product.author.last_name }}
-                    </div>
-                    <h5 class="card-title">{{ product.name }} </h5>
-                    {% ratings product %}
-                    <p class="card-text">{{ product.description|truncatewords:8 }}</p>
-                    <a href="{{ product.get_absolute_url }}" class="btn btn-outline-success btn-sm"><span>{{ product.price }} руб.</span> | Приобрести</a>                    
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+        {% include 'includes/_products-list.html' %}
     </div>
 {% endblock content %}

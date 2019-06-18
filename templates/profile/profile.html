@@ -1,0 +1,20 @@
+{% extends 'profile/base_profile.html' %}
+{% load ratings %}
+{% load static %}
+
+
+{% block title %}
+Страница товаров
+{% endblock %}
+
+{% block profile %}
+	active
+{% endblock profile %}
+
+{% block profile_body %}
+
+	<p class="description">
+		{{ profile.description }}
+	</p>
+{% endblock profile_body %}
+

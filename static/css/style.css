@@ -49,7 +49,6 @@ h1 {
 
 .menu li a {
 	color: #fff;
-	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 14px;
 
@@ -225,21 +224,8 @@ h1 {
 footer {
 	height: 250px;
 	font-size: 84px;
-	background: #10203a;
+	background: url(../img/frost.jpg) no-repeat center top/cover;
 
-}
-
-
-
-.avatar {
-	margin-right: 10px;
-	width: 38px;
-	height: 38px;
-	border: 2px solid black;
-	border-radius: 50%;
-	text-align: center;
-	background: #e17076;
-	display: block;
 }
 
 .author {

@@ -1,0 +1,29 @@
+{% load ratings %}
+{% load static %}
+{% for product in products %}
+    <div class="col-sm-4 mb-3">
+        <div class="card text-white bg-dark">
+            <a href="{{ product.get_absolute_url }}">
+                {% for prev_image in product.images.all %}
+                {% if prev_image.preview %}
+                <img src="{{ prev_image.image.url }}" class="card-img-top">
+                {% endif %}
+                {% endfor %}
+            </a>
+            <div class="card-body">
+                {% if product.author.username not in request.path%}
+                    <div class="author">
+                        <a href="{{ product.author.get_absolute_url }}"><img src="{{ product.author.avatar.url }}" alt="" width="45px" height="45px" class="border border-primary rounded-circle">
+                        {{ product.author.first_name }}
+                        {{ product.author.last_name }}
+                        </a>
+                    </div>
+                {% endif %}
+                <h5 class="card-title">{{ product.name }} </h5>
+                {% ratings product %}
+                <p class="card-text">{{ product.description|truncatewords:8 }}</p>
+                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-success btn-sm"><span>{{ product.price }} руб.</span> | Приобрести</a>                    
+            </div>
+        </div>
+    </div>
+{% endfor %}
