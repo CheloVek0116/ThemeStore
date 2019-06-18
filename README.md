@@ -4,4 +4,4 @@
 3. Запустить файл requirements.txt ***pip install -r requirements.txt***
 4. Создать миграцию ***python manage.py makemigrations***
 5. Выполнить миграцию ***python manage.py migrate***
-6. Запустить приложение ***python manage.py runserver***
+6. Запустить приложение ***python manage.py runserver***# TradeBot

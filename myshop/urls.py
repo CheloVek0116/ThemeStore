@@ -8,12 +8,17 @@ from .views import *
 
 urlpatterns = [
 	url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
+
+    path('accounts/signup/', SignUpForm.as_view(), name='signup'),
+
 	path('cart/', include('cart.urls')),
 	path('profile/', include('profileUser.urls')),
+
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('present/', present_page, name='present_page'),
     path('', include('shop.urls')),
+
 ]
 
 if settings.DEBUG:
