@@ -224,7 +224,7 @@ h1 {
 footer {
 	height: 250px;
 	font-size: 84px;
-	background: url(../img/frost.jpg) no-repeat center top/cover;
+	background: url(../img/frost.jpg) no-repeat center bottom/cover;
 
 }
 

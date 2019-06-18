@@ -30,7 +30,7 @@
 				<div class="card-body">
 					    <div class="row">
 							<div class="col-3">
-								<img src="{{ profile.avatar.url }}" alt="" width="200px" height="200px" class="border border-primary rounded-circle">
+								<img src="{% if profile.avatar %}{{ profile.avatar.url }}{% else %}{% static 'img/user.png' %}{% endif %}" alt="" width="200px" height="200px" class="border border-primary rounded-circle">
 								<h4>{{ profile.username }}</h4>
 							</div>
 							<div class="col-9">

@@ -5,11 +5,12 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
+from profileUser.views import SignUpView
 
 urlpatterns = [
 	url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
 
-    path('accounts/signup/', SignUpForm.as_view(), name='signup'),
+    path('accounts/signup/', SignUpView.as_view(), name='signup'),
 
 	path('cart/', include('cart.urls')),
 	path('profile/', include('profileUser.urls')),
@@ -18,6 +19,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('present/', present_page, name='present_page'),
     path('', include('shop.urls')),
+
 
 ]
 

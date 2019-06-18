@@ -32,7 +32,7 @@ class Product(models.Model):
 	created     = models.DateTimeField(auto_now_add=True)
 
 	def get_absolute_url(self):
-		  return reverse('shop:ProductDetail', kwargs={'username': self.author.username, 'slug': self.slug})
+		return reverse('shop:ProductDetail', kwargs={'username': self.author.username, 'slug': self.slug})
 
 	def save(self, *args, **kwargs):
 		self.slug = self.gen_slug(self.name)
