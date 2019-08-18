@@ -3,6 +3,7 @@ from django.forms import formset_factory
 
 from .models import *
 
+
 class ProductForm(forms.Form):
 	name        = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
 	description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'rows': '4'}))
@@ -15,6 +16,8 @@ class ProductForm(forms.Form):
 											widget=forms.CheckboxSelectMultiple())
 
 	price       = forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'class':'form-control'}))
+	file        = forms.FileField(widget=forms.FileInput(attrs={'accept':'application/zip'}))
+
 
 class ImagesForm(forms.Form):
 	images      = forms.ImageField(label='Фотографии', widget=forms.FileInput(attrs={'onchange':'readURL(this);', 'style': 'display: none;'}))

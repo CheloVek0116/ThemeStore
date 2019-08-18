@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # local apps
     'profileUser',
+    'orders',
     'cart',
     'shop',
 ]
@@ -75,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'myshop.context_processors.cart',
+                'myshop.context_processors.users',
             ],
         },
     },
@@ -129,10 +132,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -145,3 +154,6 @@ LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'profileUser.User'
 
 CART_SESSION_ID = 'cart'
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

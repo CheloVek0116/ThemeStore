@@ -6,65 +6,113 @@
 
 {% block content %}
 	<h1>Ваша корзина товаров</h1>
-	<table class="cart">
-		<thead>
-			<tr>
-				<th>Изображение</th>
-				<th>Продукт</th>
-				<th>Удалить</th>
-				<th>Цена</th>
-			</tr>
-		</thead>
-		<tbody>
+	<div class="row">
+		<div class="col-8 form-elegant scrollbar-light-blue">
 			{% if user.is_authenticated %}
-			    {% for product in cart.products.all %}
-				<tr>
-					<td>
-						<a href="{{ product.get_absolute_url }}">
-							{% for img in product.images.all %}
-								{% if img.preview %}
-								    <img src="{{ img.image.url }}" height="150px" alt="" />
-								{% endif %}
-							{% endfor %}
-							
-						</a>
-					</td>
-					<td>{{ product.name }}</td>
-					<td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
-					<td class="num">{{ product.price }} руб.</td>
-				</tr>
+				{% for product in cart.products.all %}
+					<div class="card mb-3 text-white bg-dark">
+						<div class="row no-gutters ">
+							<div class="col-md-4 p-2">
+								<a href="{{ product.get_absolute_url }}">
+									{% for prev_image in product.images.all %}
+										{% if prev_image.preview %}
+											<img src="{{ prev_image.image.url }}" class="border border-primary card-img">
+										{% endif %}
+									{% endfor %}
+								</a>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">
+										<a href="{% url 'cart:CartRemove' product_id=product.id %}">
+											<div class="text-right">
+												<i class="fas fa-trash"></i>
+											</div>
+										</a>
+										<a href="{{ product.get_absolute_url }}">
+											<div class="name">{{ product.name }}</div>
+										</a>
+
+										<div class="price text-right">{{ product.price }} руб.</div>
+
+										
+									</h5>
+									<p class="card-text">{{ product.description|truncatewords:8 }}</p>
+									<p class="card-text">
+										{% for cat in product.categories.all %}
+											<a href="{{ cat.get_absolute_url }}">
+												<small class="text-muted">
+													{{ cat.name }}
+												</small>
+											</a>
+										{% endfor %}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				{% endfor %}
 			{% else %}
-			    {% for item in cart %}
+				{% for item in cart %}
 				{% with product=item.product %}
-				<tr>
-					<td>
-						<a href="{{ product.get_absolute_url }}">
-							{% for img in product.images.all %}
-								{% if img.preview %}
-								    <img src="{{ img.image.url }}" height="150px" alt="" />
-								{% endif %}
-							{% endfor %}
-							
-						</a>
-					</td>
-					<td>{{ product.name }}</td>
-					<td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
-					<td class="num">{{ item.price }} руб.</td>
-				</tr>
+					<div class="card mb-3 text-white bg-dark">
+						<div class="row no-gutters ">
+							<div class="col-md-4 p-2">
+								<a href="{{ product.get_absolute_url }}">
+									{% for prev_image in product.images.all %}
+										{% if prev_image.preview %}
+											<img src="{{ prev_image.image.url }}" class="border border-primary card-img">
+										{% endif %}
+									{% endfor %}
+								</a>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">
+										<a href="{{ product.get_absolute_url }}">
+											<div class="name">{{ product.name }}</div>
+										</a>
+										<div class="price text-right">{{ product.price }} руб.</div>
+										
+									</h5>
+									<p class="card-text">{{ product.description|truncatewords:8 }}</p>
+									<p class="card-text">
+										{% for cat in product.categories.all %}
+											<a href="{{ cat.get_absolute_url }}">
+												<small class="text-muted">
+													{{ cat.name }}
+												</small>
+											</a>
+										{% endfor %}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				{% endwith %}
 				{% endfor %}
 			{% endif %}
-			
-			<tr class="total">
-				<td>Total</td>
-				<td colspan="2"></td>
-				<td class="num">{{ cart.get_total_price }} руб.</td>
-			</tr>
-		</tbody>
-	</table>
+		</div>
+		<div class="col-4">
+			<div class="card text-center text-white bg-dark">
+				<div class="card-body">
+					<h5 class="card-title">Your Cart Total</h5>
+					<h3 class="card-text">{{ cart.get_total_price }}  руб.</h3>
+				</div>
+				<div class="m-2">
+					{% if cart.get_total_price > 0 %}
+						<a href="{% url 'orders:OrderCreate' %}" class="btn btn-outline-success">Оформить заказ</a>
+					{% else %}
+						<a href="{% url 'orders:OrderCreate' %}"  class="btn btn-outline-success disabled">Оформить заказ</a>
+					{% endif %}
+					<a href="{% url 'shop:ProductList'%}" class="btn btn-outline-danger">Продолжить Шопинг</a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 	<p class="text-right">
-		<a href="{% url 'shop:ProductList'%}" class="btn">Продолжить Шопинг</a>
-		<a href="#">Оформить заказ</a>
+		
 	</p>
+
 {% endblock content %}

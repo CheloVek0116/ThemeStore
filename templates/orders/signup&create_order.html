@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Оформление заказа
+{% endblock %}
+
+{% block content %}
+	<h1>Оформление заказа</h1>
+	<div class="row">
+		<div class="order-info col-sm-12">
+			<div class="row">
+				<h2>Сначала зарегистрируйтесь</h2>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="row">
+						<div class="col-12">
+							<div class="card bg-dark text-white">
+								<div class="card-body">
+									<form action="{% url 'signup' %}" method ='post'>
+										{% csrf_token %}
+										<p>{{ form.first_name }}</p>
+										<p>{{ form.last_name }}</p>
+										<span id="error_usr"></span>
+										<p>{{ form.username }}</p>
+										<p>{{ form.password1 }}</p>
+										<p>{{ form.password2 }}</p>
+										<button type="submit" id="button_form">Submit</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>		
+				</div>
+				<div class="col-4">
+					<div class="card bg-dark">
+						<div class="card-body">
+							<ul class="list-group list-group-flush{% if cart.products.all.count > 3 %} form-elegant scrollbar-light-blue{% endif %}">
+								{% for item in cart %}
+								{% with product=item.product %}
+									<li class="list-group-item">
+										<div class="row">
+											<div class="col-6">{{ product.name|truncatechars:15 }}</div>
+											<div class="col-6 text-right">{{ product.price }} руб.</div>
+										</div>
+									</li>
+								{% endwith %}
+								{% endfor %}
+							</ul>
+							<hr color="#fff">
+							<h5>
+								<div class="text-white row">
+									<div class="col-4">Total:</div>
+									<div class="col-8 text-right">{{ cart.get_total_price }} руб.</div>
+								</div>
+							</h5>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block js %}
+	{{ block.super }}
+	<script>$("#id_username").attr("onchange", "valid_user({{ all_users|safe }});");</script>
+    <script src="{% static 'js/check_users.js' %}"></script>
+{% endblock js %}

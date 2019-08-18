@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Оформление заказа
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-8 form-elegant scrollbar-light-blue">
+            {% for item in order.items.all %}
+            {% with product=item.product %}
+            <div class="card mb-3 text-white bg-dark">
+                <div class="row no-gutters ">
+                    <div class="col-md-4 p-2">
+                        <a href="{{ product.get_absolute_url }}">
+                            {% for prev_image in product.images.all %}
+                            {% if prev_image.preview %}
+                            <img src="{{ prev_image.image.url }}" class="border border-primary card-img">
+                            {% endif %}
+                            {% endfor %}
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ product.get_absolute_url }}">
+                                    <div class="name">{{ product.name }}</div>
+                                </a>
+
+                                <div class="price text-right">{{ product.price }} руб.</div>
+
+
+                            </h5>
+                            <p class="card-text">{{ product.description|truncatewords:8 }}</p>
+                            <p class="card-text">
+                                {% for cat in product.categories.all %}
+                                <a href="{{ cat.get_absolute_url }}">
+                                    <small class="text-muted">
+                                        {{ cat.name }}
+                                    </small>
+                                </a>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+        <div class="col-4">
+            <div class="card text-center text-white bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">ID Заказa: {{ order.id }}</h5>
+                    <h6 class="card-text">{{ order.items.all.count }} товаров на сумму {{ order.get_total_cost }} руб.</h6>
+                    {{ error }}
+                    {% if order.paid %}
+                        <form action="" method="">
+                            <h3 class="card-text text-success">Оплачен</h3>
+                            <input type="submit" class="btn btn-outline-success m-2" value="Получить квитанцию">
+                        </form>
+                    {% else %}
+                        <form action="{% url 'orders:OrderDetail' order.id %}" method="post">
+                            {% csrf_token %}
+                            <h3 class="card-text text-danger">В ожидании оплаты</h3>
+                            <input type="submit" class="btn btn-outline-success m-2" value="Оплатить">
+                        </form>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

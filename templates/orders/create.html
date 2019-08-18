@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Оформление заказа
+{% endblock %}
+
+{% block content %}
+	<h1>Оформление заказа</h1>
+	<div class="row">
+		<div class="order-info col-sm-12">
+			<div class="row">
+				<h2>Ваш заказ</h2>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<form action="." method="post">
+						{% csrf_token %}
+						<button type="submit">pay</button>
+					</form>	
+				</div>
+				<div class="col-4">
+					<div class="card bg-dark">
+						<div class="card-body">
+							<ul class="list-group list-group-flush{% if cart.products.all.count > 3 %} form-elegant scrollbar-light-blue{% endif %}">
+								{% for product in cart.products.all %}
+									<li class="list-group-item">
+										<div class="row">
+											<div class="col-6">{{ product.name|truncatechars:15 }}</div>
+											<div class="col-6 text-right">{{ product.price }} руб.</div>
+										</div>
+										</li>
+								{% endfor %}
+							</ul>
+							<hr color="#fff">
+							<h5>
+								<div class="text-white row">
+									<div class="col-4">Total:</div>
+									<div class="col-8 text-right">{{ cart.get_total_price }} руб.</div>
+								</div>
+							</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+{% endblock %}

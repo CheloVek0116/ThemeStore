@@ -3,17 +3,17 @@
 {% for product in products %}
     <div class="col-sm-4 mb-3">
         <div class="card text-white bg-dark">
-            <a href="{{ product.get_absolute_url }}">
+            <a href="{{ product.get_absolute_url }}" >
                 {% for prev_image in product.images.all %}
-                {% if prev_image.preview %}
-                <img src="{{ prev_image.image.url }}" class="card-img-top">
-                {% endif %}
+                    {% if prev_image.preview %}
+                        <img src="{{ prev_image.image.url }}" height="250px" class="card-img-top">
+                    {% endif %}
                 {% endfor %}
             </a>
             <div class="card-body">
                 {% if product.author.username not in request.path%}
                     <div class="author">
-                        <a href="{{ product.author.get_absolute_url }}"><img src="{{ product.author.avatar.url }}" alt="" width="45px" height="45px" class="border border-primary rounded-circle">
+                        <a href="{{ product.author.get_absolute_url }}"><img src="{% if product.author.avatar %}{{ product.author.avatar.url }}{% else %}{% static 'img/user.png' %}{% endif %}" alt="" width="45px" height="45px" class="border border-primary rounded-circle">
                         {{ product.author.first_name }}
                         {{ product.author.last_name }}
                         </a>

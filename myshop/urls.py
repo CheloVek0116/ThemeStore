@@ -12,14 +12,14 @@ urlpatterns = [
 
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
 
-	path('cart/', include('cart.urls')),
-	path('profile/', include('profileUser.urls')),
-
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('present/', present_page, name='present_page'),
-    path('', include('shop.urls')),
 
+    path('cart/', include('cart.urls')),
+	path('profile/', include('profileUser.urls')),
+    path('orders/', include('orders.urls')),
+    path('', include('shop.urls')),
 
 ]
 

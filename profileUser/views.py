@@ -43,14 +43,20 @@ class SignUpView(CreateView):
 	template_name = 'registration/signup.html'
 
 	def form_valid(self, form):
+		print(form)
 		# Создаём пользователя, если данные в форму были введены корректно.
 		form.save()
-		self.success_url = reverse('profileUser:LoginRedirect', kwargs={'login_user': form.cleaned_data['username'], 'password': form.cleaned_data['password1']})
+		if self.request.META.get('HTTP_REFERER') == 'http://192.168.0.5:8000/orders/create/':
+			referer = 'orders&create'
+		else:
+			referer = 'create'
+
+		self.success_url = reverse('profileUser:LoginRedirect', kwargs={'login_user': form.cleaned_data['username'], 'password': form.cleaned_data['password1'], 'referer': referer})
 		# Вызываем метод базового класса
 		return super(SignUpView, self).form_valid(form)
 
 
-def LoginRedirect(request, login_user, password):
+def LoginRedirect(request, login_user, password, referer):
 	cart = Cart(request)
 	products_in_cart = cart.all()
 	user = User.objects.get(username=authenticate(request, username=login_user, password=password))
@@ -58,6 +64,7 @@ def LoginRedirect(request, login_user, password):
 	for product_id in products_in_cart:
 		product = Product.objects.get(id=product_id)
 		cart_user.products.add(product)
-	print(cart_user.products.all())
 	login(request, user)
+	if referer == 'orders&create':
+		return redirect('orders:OrderCreate')
 	return redirect(user.get_absolute_url())

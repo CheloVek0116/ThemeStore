@@ -3,6 +3,7 @@ from django.shortcuts import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from star_ratings.models import Rating
 from django.utils.text import slugify
+from .validators import validate_file_extension
 
 from django.conf import settings
 
@@ -13,7 +14,7 @@ class Category(models.Model):
 	name     = models.CharField(max_length=200, verbose_name="Название")
 
 	def get_absolute_url(self):
-		pass        
+		return reverse('shop:ProductList', kwargs={'category': self.name})
 
 	def __str__(self):
 		return self.name
@@ -29,6 +30,7 @@ class Product(models.Model):
 	price       = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
 	ratings     = GenericRelation(Rating, related_query_name='products')
 	created     = models.DateTimeField(auto_now_add=True)
+	file        = models.FileField(validators=[validate_file_extension])
 
 	def get_absolute_url(self):
 		return reverse('shop:ProductDetail', kwargs={'username': self.author.username, 'slug': self.slug})

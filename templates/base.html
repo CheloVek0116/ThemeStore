@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}title{% endblock title %}</title>
     <!-- Styles -->
-    <link href="{% static 'css/font-awesome/css/all.css' %}" rel="stylesheet">
+    
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/font-awesome/css/all.css' %}" type="text/css">
@@ -20,16 +20,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-                    <a href="{% if user.is_authenticated %}
-                                {% url 'shop:ProductList' %}
-                            {% else %}
-                                {% url 'present_page' %}      
-                            {% endif %}">
+                    <a href="{% url 'shop:ProductList' %}">
                         <img src="{% static 'img/logo.png' %}" alt="Scanfcode" width="80%">
                     </a>
                 </div>
-                <div class="col-6 ml-auto">
-                    <nav>
+                <div class="col-10 ml-auto">
+                    <nav class="align-items-center">
                         <ul class ="menu">
                             <li>
                                 <a href="{% if user.is_authenticated %}{% url 'shop:ProductList' %}{% else %}{% url 'present_page' %}{% endif %}">Главная</a>
@@ -39,7 +35,6 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLink">
                                     Каталог 
-                                    <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start">
@@ -54,12 +49,29 @@
 
 
                             <li>
-                                <a href="{% url 'cart:CartDetail' %}"><i class="fas fa-shopping-cart"></i> Корзина</a>
+                                <a href="{% url 'cart:CartDetail' %}"><i class="fas fa-shopping-cart"></i>
+                                    {% if user.is_authenticated %}
+                                        {{ cart.products.count }}
+                                    {% else %}
+                                        {{ cart.all|length }}
+                                    {% endif %} Корзина</a>
                             </li>
 
                             {% if user.is_authenticated %}
-                            <li>
-                                <a href="{{ user.get_absolute_url }}">Профиль</a>
+                            <li class="dropdown align-items">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLink">
+                                    <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'img/user.png' %}{% endif %}" alt="" width="35px" height="35px" class="border border-primary rounded-circle bg-white">
+                                    {{ user.first_name }}
+                                    {{ user.last_name }}
+                                </a>
+
+                                <div class="dropdown-menu ml-4 mt-2" aria-labelledby="dropdownMenuLink" x-placement="bottom-start">
+                                    <a href="{{ user.get_absolute_url }}" class="dropdown-item">Профиль</a>
+                                    <a href="#" class="dropdown-item">Баланс: {{ user.balance }} руб.</a>
+                                    <a href="{% url 'orders:Orders' %}" class="dropdown-item">Заказы</a>
+                                    <a href="#" class="dropdown-item">Настройки</a>
+                                </div>
+
                             </li>
                             <li>
                                 <a href="{% url 'shop:ProductAdd' %}">+</a>

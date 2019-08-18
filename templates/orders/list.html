@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Оформление заказа
+{% endblock %}
+
+{% block content %}
+	<h1>Ваши заказы</h1>
+	<div class="row">
+		<div class="col-8 form-elegant scrollbar-light-blue">
+			{% for order in orders %}
+				<div class="card mb-3 text-white bg-dark">
+					<div class="card-body">
+						<h5 class="card-title">
+							<a href="{% url 'orders:OrderDetail' order_id=order.id %}">
+								<div class="name">ID Заказa: {{ order.id }}</div>
+							</a>
+							<div class="text-right">
+								{{ order.items.all.count }} товаров на сумму {{ order.get_total_cost }} руб.
+								{% if order.paid %}
+									<h3 class="card-text text-success">Оплачен</h3>
+								{% else %}
+									<h3 class="card-text text-danger">В ожидании оплаты</h3>
+								{% endif %}
+							</div>
+						</h5>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="col-4">
+			<div class="card text-center text-white bg-dark">
+				<div class="card-body">
+					<h5 class="card-title">Какой-то Заголовок</h5>
+					<h3 class="card-text">Какой-то Текст</h3>
+					<input type="submit" class="btn btn-outline-success m-1" value="Получить Выписку">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

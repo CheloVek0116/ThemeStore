@@ -33,8 +33,5 @@ def CartRemove(request, product_id):
 
 
 def CartDetail(request):
-	if request.user.is_authenticated:
-		cart = CartUser.objects.get(user=request.user)
-	else:
-		cart = Cart(request)
+	cart = CartUser.objects.get(user=request.user) if request.user.is_authenticated else Cart(request)		
 	return render(request, 'cart/detail.html', {'cart': cart})

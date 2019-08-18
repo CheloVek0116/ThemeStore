@@ -1,13 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %} Sign Up {% endblock %}
 
 {% block content %}
 <div class="container">
-    <form method ='post'>
+    <form action="{% url 'signup' %}" method ='post'>
         {% csrf_token %}
+        <span id="error_usr"></span>
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" id="button_form">Submit</button>
     </form>
 </div>
 {% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/check_users.js' %}">
+    	all_users = {{ all_users|safe }};
+	</script>
+{% endblock js %}
